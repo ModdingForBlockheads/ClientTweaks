@@ -60,5 +60,9 @@
     "config.clienttweaks.customization.shieldWeapons": "Shield Weapons",
     "config.clienttweaks.customization.shieldWeapons.tooltip":  "Items that count as weapons for the offhand-shield hiding tweak options.",
     "config.clienttweaks.customization.shieldItems": "Shield Items",
-    "config.clienttweaks.customization.shieldItems.tooltip":  "Items that count as shields for the offhand-shield hiding tweak options."
+    "config.clienttweaks.customization.shieldItems.tooltip":  "Items that count as shields for the offhand-shield hiding tweak options.",
+    "config.clienttweaks.customization.fireworkItems": "Firework Items",
+    "config.clienttweaks.customization.fireworkItems.tooltip":  "Items that count as fireworks for the offhand-firework tweak options.",
+    "config.clienttweaks.customization.fragileBlocks": "Fragile Blocks",
+    "config.clienttweaks.customization.fragileBlocks.tooltip": "Blocks that should be protected in the prevent accidental mining tweak."
 }
