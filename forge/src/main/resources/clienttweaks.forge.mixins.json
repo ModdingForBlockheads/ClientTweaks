@@ -3,7 +3,6 @@
   "minVersion": "0.8",
   "package": "net.blay09.mods.clienttweaks.forge.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "clienttweaks.refmap.json",
   "mixins": [
   ],
   "client": [
