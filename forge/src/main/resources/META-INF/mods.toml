@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/TwelveIterationMods/ClientTweaks/issues"
 
 [[mods]]
 modId="clienttweaks"
-version="${mod_version}"
+version="${version}"
 displayName="Client Tweaks"
 displayURL="https://mods.twelveiterations.com/mc/clienttweaks"
 logoFile="clienttweaks-icon.png"
