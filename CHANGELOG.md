@@ -1,1 +1,2 @@
-- Add support for tags (prefixed with `#`) in `torchItems`, `torchTools`, `shieldWeapons`, `shieldItems` and `fireworkItems` options
+- Added `disablePavingWithBlockInOffhand` option
+- Added support for tags (prefixed with `#`) in `torchItems`, `torchTools`, `shieldWeapons`, `shieldItems` and `fireworkItems` options
