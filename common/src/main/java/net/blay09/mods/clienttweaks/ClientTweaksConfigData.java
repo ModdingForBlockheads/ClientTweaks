@@ -55,6 +55,9 @@ public class ClientTweaksConfigData implements BalmConfigData {
         @Comment("This option will disable log stripping.")
         public boolean disableLogStripping = false;
 
+        @Comment("This option will disable paving when holding a block in your offhand.")
+        public boolean disablePavingWithBlockInOffhand = true;
+
         @Comment("This adds back the master volume slider to the options screen. Saves you a click!")
         public boolean masterVolumeSlider = true;
 
