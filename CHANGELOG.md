@@ -1,1 +1,1 @@
-- Updated to Minecraft 1.21.1
+- Add support for tags (prefixed with `#`) in `torchItems`, `torchTools`, `shieldWeapons`, `shieldItems` and `fireworkItems` options
