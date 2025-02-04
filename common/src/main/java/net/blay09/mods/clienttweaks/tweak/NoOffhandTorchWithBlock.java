@@ -22,15 +22,10 @@ public class NoOffhandTorchWithBlock extends AbstractClientTweak {
         if (isEnabled() && event.getHand() == InteractionHand.OFF_HAND) {
             Minecraft mc = Minecraft.getInstance();
             ItemStack heldItem = mc.player != null ? mc.player.getItemInHand(event.getHand()) : ItemStack.EMPTY;
-            if (!heldItem.isEmpty()) {
-                ResourceLocation registryName = Balm.getRegistries().getKey(heldItem.getItem());
-                if (registryName != null) {
-                    if (ClientTweaksConfig.getActive().customization.torchItems.contains(registryName.toString())) {
-                        ItemStack mainItem = mc.player.getMainHandItem();
-                        if (!mainItem.isEmpty() && mainItem.getItem() instanceof BlockItem) {
-                            event.setCanceled(true);
-                        }
-                    }
+            if (ClientTweaksConfig.isTorchItem(heldItem)) {
+                ItemStack mainItem = mc.player.getMainHandItem();
+                if (!mainItem.isEmpty() && mainItem.getItem() instanceof BlockItem) {
+                    event.setCanceled(true);
                 }
             }
         }

@@ -6,9 +6,7 @@ import net.blay09.mods.clienttweaks.ClientTweaksConfig;
 import net.blay09.mods.clienttweaks.ClientTweaksConfigData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 
 public class NoOffhandTorchWithFood extends AbstractClientTweak {
@@ -23,15 +21,10 @@ public class NoOffhandTorchWithFood extends AbstractClientTweak {
         if (isEnabled() && event.getHand() == InteractionHand.OFF_HAND) {
             Minecraft mc = Minecraft.getInstance();
             ItemStack heldItem = mc.player != null ? mc.player.getItemInHand(event.getHand()) : ItemStack.EMPTY;
-            if (!heldItem.isEmpty()) {
-                ResourceLocation registryName = Balm.getRegistries().getKey(heldItem.getItem());
-                if (registryName != null) {
-                    if (ClientTweaksConfig.getActive().customization.torchItems.contains(registryName.toString())) {
-                        ItemStack mainItem = mc.player.getMainHandItem();
-                        if (!mainItem.isEmpty() && mainItem.has(DataComponents.FOOD)) {
-                            event.setCanceled(true);
-                        }
-                    }
+            if (ClientTweaksConfig.isTorchItem(heldItem)) {
+                ItemStack mainItem = mc.player.getMainHandItem();
+                if (!mainItem.isEmpty() && mainItem.has(DataComponents.FOOD)) {
+                    event.setCanceled(true);
                 }
             }
         }

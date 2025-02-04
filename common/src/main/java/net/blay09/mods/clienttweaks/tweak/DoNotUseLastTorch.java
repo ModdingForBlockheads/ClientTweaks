@@ -8,11 +8,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.Objects;
 
 public class DoNotUseLastTorch extends AbstractClientTweak {
 
@@ -26,15 +23,12 @@ public class DoNotUseLastTorch extends AbstractClientTweak {
         if (isEnabled() && event.getHand() == InteractionHand.OFF_HAND) {
             Minecraft mc = Minecraft.getInstance();
             ItemStack heldItem = mc.player != null ? mc.player.getItemInHand(event.getHand()) : ItemStack.EMPTY;
-            if (!heldItem.isEmpty()) {
-                ResourceLocation registryName = Balm.getRegistries().getKey(heldItem.getItem());
-                if (ClientTweaksConfig.getActive().customization.torchItems.contains(Objects.toString(registryName))) {
-                    if (heldItem.getCount() == 1) {
-                        MutableComponent chatComponent = Component.translatable("chat.clienttweaks.lastTorch");
-                        chatComponent.withStyle(ChatFormatting.RED);
-                        mc.player.displayClientMessage(chatComponent, true);
-                        event.setCanceled(true);
-                    }
+            if (ClientTweaksConfig.isTorchItem(heldItem)) {
+                if (heldItem.getCount() == 1) {
+                    MutableComponent chatComponent = Component.translatable("chat.clienttweaks.lastTorch");
+                    chatComponent.withStyle(ChatFormatting.RED);
+                    mc.player.displayClientMessage(chatComponent, true);
+                    event.setCanceled(true);
                 }
             }
         }
