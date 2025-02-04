@@ -5,7 +5,6 @@ import net.blay09.mods.balm.api.event.client.UseItemInputEvent;
 import net.blay09.mods.clienttweaks.ClientTweaksConfig;
 import net.blay09.mods.clienttweaks.ClientTweaksConfigData;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
@@ -28,15 +27,10 @@ public class NoOffhandFireworksWithElytra extends AbstractClientTweak {
             }
 
             ItemStack heldItem = mc.player != null ? mc.player.getItemInHand(event.getHand()) : ItemStack.EMPTY;
-            if (!heldItem.isEmpty()) {
-                ResourceLocation registryName = Balm.getRegistries().getKey(heldItem.getItem());
-                if (registryName != null) {
-                    if (ClientTweaksConfig.getActive().customization.fireworkItems.contains(registryName.toString())) {
-                        ItemStack wornChestItem = mc.player != null ? mc.player.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY;
-                        if (wornChestItem.is(Items.ELYTRA) && !mc.player.isFallFlying()) {
-                            event.setCanceled(true);
-                        }
-                    }
+            if (ClientTweaksConfig.isFireworkItem(heldItem)) {
+                ItemStack wornChestItem = mc.player != null ? mc.player.getItemBySlot(EquipmentSlot.CHEST) : ItemStack.EMPTY;
+                if (wornChestItem.is(Items.ELYTRA) && !mc.player.isFallFlying()) {
+                    event.setCanceled(true);
                 }
             }
         }

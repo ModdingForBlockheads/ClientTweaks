@@ -8,7 +8,6 @@ import net.blay09.mods.clienttweaks.ClientTweaksConfigData;
 import net.blay09.mods.clienttweaks.mixin.ItemInHandRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemInHandRenderer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -35,8 +34,8 @@ public class HideShieldUnlessHoldingWeapon extends AbstractClientTweak {
             return;
         }
 
-        ResourceLocation registryName = Balm.getRegistries().getKey(event.getItemStack().getItem());
-        boolean isShield = Balm.getHooks().isShield(event.getItemStack()) || ClientTweaksConfig.getActive().customization.shieldItems.contains(registryName.toString());
+        boolean isShield = Balm.getHooks().isShield(event.getItemStack())
+                || ClientTweaksConfig.isShieldItem(event.getItemStack());
         if (!isShield) {
             return;
         }
@@ -45,9 +44,9 @@ public class HideShieldUnlessHoldingWeapon extends AbstractClientTweak {
         boolean weaponInHand = hasWeaponInHand(player);
         if (!weaponInHand && !isBlocking) {
             event.setCanceled(true);
-        } else if(weaponInHand && !wasWeaponInHand) {
+        } else if (weaponInHand && !wasWeaponInHand) {
             ItemInHandRenderer itemInHandRenderer = Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer();
-            if(itemInHandRenderer instanceof ItemInHandRendererAccessor accessor) {
+            if (itemInHandRenderer instanceof ItemInHandRendererAccessor accessor) {
                 accessor.setOOffHandHeight(0f);
                 accessor.setOffHandHeight(0f);
             }
@@ -62,8 +61,7 @@ public class HideShieldUnlessHoldingWeapon extends AbstractClientTweak {
             return true;
         }
 
-        ResourceLocation mainItemRegistryName = Balm.getRegistries().getKey(mainItem.getItem());
-        return ClientTweaksConfig.getActive().customization.shieldWeapons.contains(mainItemRegistryName.toString());
+        return ClientTweaksConfig.isShieldWeapon(mainItem);
     }
 
     @Override
