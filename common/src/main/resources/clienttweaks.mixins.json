@@ -13,6 +13,7 @@
     "ChainBlockMixin",
     "RecipeBookComponentMixin",
     "AxeItemAccessor",
+    "ShovelItemMixin",
     "ItemInHandRendererAccessor"
   ],
   "injectors": {
