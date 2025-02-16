@@ -1,2 +1,1 @@
-- Added `disablePavingWithBlockInOffhand` option
-- Added support for tags (prefixed with `#`) in `torchItems`, `torchTools`, `shieldWeapons`, `shieldItems` and `fireworkItems` options
+- Fixed crash with other mods that extend CrossCollisionBlock but do not use its block state properties
