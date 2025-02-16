@@ -27,8 +27,18 @@ public class CrossCollisionBlockMixin {
         Player player = Minecraft.getInstance().player;
         boolean isHoldingCrossCollisionBlock = player != null && Block.byItem(player.getMainHandItem().getItem()) instanceof CrossCollisionBlock;
         if (isHoldingCrossCollisionBlock && ClientTweaksConfig.getActive().tweaks.paneBuildingSupport) {
-            boolean isPillarSection = !state.getValue(CrossCollisionBlock.EAST) && !state.getValue(CrossCollisionBlock.WEST) && !state.getValue(CrossCollisionBlock.NORTH) && !state.getValue(CrossCollisionBlock.SOUTH);
-            boolean isThinSection = isOnlyOneTrue(state.getValue(CrossCollisionBlock.EAST), state.getValue(CrossCollisionBlock.WEST), state.getValue(CrossCollisionBlock.NORTH), state.getValue(CrossCollisionBlock.SOUTH));
+            // Exit out early if the block does not have the properties we use, to prevent crashes with mods that extend CrossCollisionBlock
+            if (!state.hasProperty(CrossCollisionBlock.EAST) || !state.hasProperty(CrossCollisionBlock.WEST) || !state.hasProperty(CrossCollisionBlock.NORTH) || !state.hasProperty(
+                    CrossCollisionBlock.SOUTH)) {
+                return;
+            }
+
+            boolean isPillarSection = !state.getValue(CrossCollisionBlock.EAST) && !state.getValue(CrossCollisionBlock.WEST) && !state.getValue(
+                    CrossCollisionBlock.NORTH) && !state.getValue(CrossCollisionBlock.SOUTH);
+            boolean isThinSection = isOnlyOneTrue(state.getValue(CrossCollisionBlock.EAST),
+                    state.getValue(CrossCollisionBlock.WEST),
+                    state.getValue(CrossCollisionBlock.NORTH),
+                    state.getValue(CrossCollisionBlock.SOUTH));
             if (isThinSection || isPillarSection) {
                 VoxelShape originalShape = callbackInfo.getReturnValue();
                 VoxelShape modifiedShape = Shapes.create(originalShape.bounds()
