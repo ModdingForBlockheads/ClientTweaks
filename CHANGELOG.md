@@ -1,1 +1,1 @@
-- Fixed crash with other mods that extend CrossCollisionBlock but do not use its block state properties
+- Fixed master and music sliders not resetting properly when resizing window
